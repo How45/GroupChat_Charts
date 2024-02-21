@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/drop_box.css">
+    <title>File Upload</title>
+</head>
+<body>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <div class="file-box">
+            <p id="drop-text">Drop-File here</p>
+            <input type="file" name="chat-file" accept=".txt,.json" />
+            <button>Upload</button>
+        </div>
+        <!-- <script src="../scripts/upload_file.js"></script> -->
+    </form>
+
+    <table class="file-table" id="file-list">
+        <thead>
+            <tr>
+                <th>File Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for file in files %}
+                <tr>
+                    <td><form action="/display_graphs" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="file_name" value="{{ file }}">
+                        <button type="submit" class="file-link">{{ file }}</button>
+                    </form></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <!-- <script src="../scripts/file_list.js"></script> -->
+    </table>
+</body>
+</html>

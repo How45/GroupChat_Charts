@@ -1,0 +1,42 @@
+.file-box {
+    width: 250px;
+    height: 200px;
+
+    padding: 10px;
+    border: 2px dashed #dfdfdf;
+    background-color: #f0f0f0;
+    position: absolute;
+
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.file-box:hover {
+    background-color: #b6b6b6a4;
+}
+
+p {
+    color: gray;
+    text-align: center;
+}
+
+#chat-file {
+    text-align: center;
+}
+
+table {
+    width: 250px;
+    height: 200px;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #000000b9;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #000000b9;
+    padding: 8px;
+}

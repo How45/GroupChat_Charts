@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/graph_pos.css">
+    <title>Graphs</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../static/graphs.js"></script>
+    <script src="../static/helper.js"></script>
+</head>
+<body>
+    <div class="area-1">
+        <div class="g1">
+            <canvas id="mostDid"></canvas>
+        </div>
+        <div class="tools">
+            <div class="tool-box">
+                <div class="side-tabs">
+                    <button class="tabs-buttons" data-for-tab="1">tabs #1</button>
+                    <button class="tabs-buttons" data-for-tab="2">tabs #2</button>
+                    <button class="tabs-buttons" data-for-tab="3">tabs #3</button>
+                </div>
+                <div class="display-tools">
+                    <div class="tool-options" data-tab="1">
+                        <p>Working #1</p>
+                    </div>
+                    <div class="tool-options" data-tab="2">
+                        <p>Working #2</p>
+                    </div>
+                    <div class="tool-options" data-tab="3">
+                        <p>Working #3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="g2">
+            <canvas id="stats"></canvas>
+        </div>
+        <div class="g3">
+            <canvas id="people-graph"></canvas>
+        </div>
+    </div>
+</body>
+<script>
+    let mostMessages = {{ most_sent_messages | safe }};
+    let whoSaidMostNames = {{ most_name_data | safe }};
+    let wordCount = {{ word_count | safe }}; // g1
+    let nameSaidMost = {{ name_said_most | safe }}; // g3
+    let responseMessage = {{ response_message | safe }};
+    userMostSentMessage(mostMessages);
+    userSaidName(whoSaidMostNames);
+    // mostUsedWord(wordCount);
+    // nameCount(nameSaidMost);
+    respondedMessage(responseMessage);
+</script>
+</html>
