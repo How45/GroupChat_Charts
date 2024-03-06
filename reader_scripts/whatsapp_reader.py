@@ -55,4 +55,9 @@ class WhatsAppReader():
         log = self.normalise_data(log)
         dataframe = hp.to_pandas(log)
 
-        return dataframe
+        dataframe.to_excel('LyfeRP_Chat.xlsx', index=False)
+        # return dataframe
+if __name__ == '__main__':
+    wap = WhatsAppReader('Not_LyfeRP_Chat.txt')
+    wap.open_file()
+    
