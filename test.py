@@ -13,24 +13,27 @@ class TestApp(unittest.TestCase):
     Unit-test class
     """
     def setUp(self):
-        whats_reader = whatsApp.WhatsAppReader('file_upload/WhatsApp_Chat_with_Not_LyfeRP.txt') # Example file needs to be added
-        dis_reader   = discord.DiscordReader('file_upload/messages.csv') # Example file needs to be added
+        # Example file needs to be added
+        whats_reader = whatsApp.WhatsAppReader('file_upload/Not_LyfeRP_Chat.txt')
+
+        # Example file needs to be added
+        # dis_reader = discord.DiscordReader('file_upload/messages.csv')
+
         self.whats_dataframe = whats_reader.open_file()
-        self.dis_dataframe = dis_reader.open_file()
-        self.names_to_check = ['joe','milly','julia','elliot']
+        # self.dis_dataframe = dis_reader.open_file()
 
     def test_dataframes(self):
         """
         Test dicord reader
         """
-        print(self.dis_dataframe.head())
+        # print(self.dis_dataframe.head())
         print(self.whats_dataframe.head())
 
     def test_response_graph(self):
         """
         Testing response_messsages graph
         """
-        print(graphs.response_messsages(self.dis_dataframe))
+        print(graphs.response_messsages(self.whats_dataframe))
 
 if __name__ == '__main__':
     unittest.main()
