@@ -64,3 +64,49 @@ def count_mentions(dataframe: pd.DataFrame, user: str, name_check: list) -> dict
             mention_count[name.capitalize()] = int(0)
 
     return mention_count
+
+def cal_convo_timeframe(dataframe: pd.DataFrame, time_frame: list) -> dict:
+    """
+    Cals the convos in dataframe
+    """
+    dataframe['Time'] = pd.to_datetime(dataframe['Time'], format='%H:%M:%S').dt.time
+
+    conv_time_count = {'M':0, 'A':0, 'E': 0, 'N': 0}
+    for i, tod in enumerate(time_frame):
+        start = datetime.strptime(tod[0], '%H:%M:%S').time()
+        end = datetime.strptime(tod[1], '%H:%M:%S').time()
+        time_stamp = dataframe[(dataframe['Time'] > start) & (dataframe['Time'] <= end)]
+
+        if len(time_stamp.index):
+            current_t, current_d, first_message = '', '', 0
+            for date, time in zip(time_stamp['Date'], time_stamp['Time']):
+                if not current_d and not current_t:
+                    current_d = date
+                    current_t = time
+                    first_message = 1
+
+                elif current_d == date and time < datetime.strptime(add_time(str(current_t)), '%H:%M:%S').time():
+                    if first_message == 1:
+                        current_t = time
+                        first_message += 1
+
+                    elif first_message == 2:
+                        current_d = date
+                        current_t = time
+
+                elif current_d != date or time > datetime.strptime(add_time(str(current_t)), '%H:%M:%S').time():
+                    if first_message == 1:
+                        current_d = date
+                        current_t = time
+                    elif first_message == 2:
+                        conv_time_count[list(conv_time_count.keys())[i]] += 1
+                        current_d = date
+                        current_t = time
+                        first_message = 1
+        else:
+            print(f"Empty data, time: {tod}")
+
+    return conv_time_count
+# odd
+# {'M': 109, 'A': 223, 'E': 125, 'N': 0} - No Filter of single messages
+# {'M': 73, 'A': 167, 'E': 89, 'N': 0} - Filter of single message (supposedly)

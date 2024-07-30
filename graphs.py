@@ -1,6 +1,6 @@
 """Graph, numpy modules and helper function"""
 import json
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import helper as hp
@@ -97,4 +97,21 @@ def who_said_most_name(dataframe: pd.DataFrame, names_to_check: list) -> json:
     return json.dumps(data)
     # dataframe_mentions.plot(kind='bar', stacked=True)
     # plt.title('User Mentions of Names')
+    # plt.show()
+
+def convos_time(dataframe: pd.DataFrame) -> None:
+    """
+    Graph to show how many convosations over a day
+    """
+    time_table = dataframe[['Date', 'Time']]
+    time_stamp = [('5:00:00','12:00:00'), ('12:00:00', '18:00:00'),
+                  ('18:00:00', '22:00:00'), ('22:00:00', '04:00:00')]
+    data = hp.cal_convo_timeframe(time_table, time_stamp)
+    # print(data)
+
+    return json.dumps(data)
+    # plt.bar(list(map(lambda x: str(x), time_stamp)),
+    #         list(data.values()), align='center')
+    # plt.title('Convos time period')
+    # plt.xticks(fontsize=7)
     # plt.show()

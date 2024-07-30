@@ -4,9 +4,10 @@ Unit testing program to test work
 # import json
 import unittest
 import reader_scripts.whatsapp_reader as whatsApp
-import reader_scripts.discord_reader as discord
+# import reader_scripts.discord_reader as discord
 import graphs
 # import helper as hp
+
 
 class TestApp(unittest.TestCase):
     """
@@ -34,6 +35,12 @@ class TestApp(unittest.TestCase):
         Testing response_messsages graph
         """
         print(graphs.response_messsages(self.whats_dataframe))
+
+    def test_convos(self):
+        """
+        Testing the convos_time
+        """
+        graphs.convos_time(self.whats_dataframe)
 
 if __name__ == '__main__':
     unittest.main()
